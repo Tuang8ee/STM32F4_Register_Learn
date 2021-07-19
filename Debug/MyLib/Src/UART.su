@@ -1,0 +1,6 @@
+core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+core_cm4.h:1816:22:__NVIC_SetPriority	16	static
+UART.c:10:6:UART2_Config	8	static
+UART.c:60:6:UART2_SendChar	16	static
+UART.c:65:6:UART2_Writes	24	static
+UART.c:74:6:UART2_ReadChar	16	static
