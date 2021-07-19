@@ -41,11 +41,10 @@
 									<listOptionValue builtIn="false" value="DEBUG"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.793707516" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="../Inc"/>
-									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_Res\STM32F4_Register_Learn\MyLib\Inc&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_Res\STM32F4_Register_Learn\MyPeripheralLib\Inc&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_Res\STM32F4_Register_Learn\Drivers\CMSIS\Device\ST\STM32F4xx\Include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_Res\STM32F4_Register_Learn\Drivers\CMSIS\Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_VHEC_Training\STM32F4_Register_Learn\Drivers\CMSIS\Device\ST\STM32F4xx\Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_VHEC_Training\STM32F4_Register_Learn\Drivers\CMSIS\Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_VHEC_Training\STM32F4_Register_Learn\MyLib\Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_VHEC_Training\STM32F4_Register_Learn\MyPeripheralLib\Inc&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.2108922739" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
