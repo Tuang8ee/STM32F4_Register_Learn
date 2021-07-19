@@ -41,8 +41,8 @@ STM32F4_Register_Learn.bin \
 all: STM32F4_Register_Learn.elf secondary-outputs
 
 # Tool invocations
-STM32F4_Register_Learn.elf: $(OBJS) $(USER_OBJS) F:\Projects\Projects\Work\Work\Learn\STM32_Res\STM32F4_Register_Learn\STM32F407VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "STM32F4_Register_Learn.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"F:\Projects\Projects\Work\Work\Learn\STM32_Res\STM32F4_Register_Learn\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F4_Register_Learn.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32F4_Register_Learn.elf: $(OBJS) $(USER_OBJS) D:\Users\tuang\Documents\GitHub\STM32F4_Register_Learn\STM32F407VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "STM32F4_Register_Learn.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Users\tuang\Documents\GitHub\STM32F4_Register_Learn\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F4_Register_Learn.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

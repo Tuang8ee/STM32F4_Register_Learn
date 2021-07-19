@@ -148,7 +148,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x49d MyLib/Src/I2C.o
  .debug_macro   0x0000000000000000      0x148 MyLib/Src/I2C.o
  .debug_line    0x0000000000000000      0x639 MyLib/Src/I2C.o
- .debug_str     0x0000000000000000    0x884d3 MyLib/Src/I2C.o
+ .debug_str     0x0000000000000000    0x884c4 MyLib/Src/I2C.o
  .comment       0x0000000000000000       0x7c MyLib/Src/I2C.o
  .debug_frame   0x0000000000000000      0x12c MyLib/Src/I2C.o
  .ARM.attributes
@@ -323,7 +323,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x2e MyPeripheralLib/Src/DS3231.o
  .debug_macro   0x0000000000000000       0x82 MyPeripheralLib/Src/DS3231.o
  .debug_line    0x0000000000000000      0x610 MyPeripheralLib/Src/DS3231.o
- .debug_str     0x0000000000000000    0x88531 MyPeripheralLib/Src/DS3231.o
+ .debug_str     0x0000000000000000    0x88522 MyPeripheralLib/Src/DS3231.o
  .comment       0x0000000000000000       0x7c MyPeripheralLib/Src/DS3231.o
  .debug_frame   0x0000000000000000       0xac MyPeripheralLib/Src/DS3231.o
  .ARM.attributes
@@ -367,16 +367,13 @@ Discarded input sections
  .data          0x0000000000000000        0x0 Src/main.o
  .bss           0x0000000000000000        0x0 Src/main.o
  .debug_macro   0x0000000000000000      0xa60 Src/main.o
- .debug_macro   0x0000000000000000       0x2f Src/main.o
  .debug_macro   0x0000000000000000       0x22 Src/main.o
- .debug_macro   0x0000000000000000       0x8e Src/main.o
- .debug_macro   0x0000000000000000       0x51 Src/main.o
+ .debug_macro   0x0000000000000000       0x2f Src/main.o
  .debug_macro   0x0000000000000000       0xef Src/main.o
  .debug_macro   0x0000000000000000       0x6a Src/main.o
  .debug_macro   0x0000000000000000      0x1df Src/main.o
  .debug_macro   0x0000000000000000       0x1c Src/main.o
  .debug_macro   0x0000000000000000       0x22 Src/main.o
- .debug_macro   0x0000000000000000       0xdf Src/main.o
  .debug_macro   0x0000000000000000     0x102d Src/main.o
  .debug_macro   0x0000000000000000      0x11f Src/main.o
  .debug_macro   0x0000000000000000    0x15e3c Src/main.o
@@ -502,7 +499,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 Src/syscalls.o
  .debug_macro   0x0000000000000000       0x88 Src/syscalls.o
  .debug_line    0x0000000000000000      0x739 Src/syscalls.o
- .debug_str     0x0000000000000000     0x88a5 Src/syscalls.o
+ .debug_str     0x0000000000000000     0x8896 Src/syscalls.o
  .comment       0x0000000000000000       0x7c Src/syscalls.o
  .debug_frame   0x0000000000000000      0x2ac Src/syscalls.o
  .ARM.attributes
@@ -584,7 +581,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 Src/sysmem.o
  .debug_macro   0x0000000000000000      0x145 Src/sysmem.o
  .debug_line    0x0000000000000000      0x559 Src/sysmem.o
- .debug_str     0x0000000000000000     0x7afe Src/sysmem.o
+ .debug_str     0x0000000000000000     0x7aef Src/sysmem.o
  .comment       0x0000000000000000       0x7c Src/sysmem.o
  .debug_frame   0x0000000000000000       0x34 Src/sysmem.o
  .ARM.attributes
@@ -1066,7 +1063,7 @@ OUTPUT(STM32F4_Register_Learn.elf elf32-littlearm)
  .debug_ranges  0x0000000000000120       0x50 Src/main.o
  .debug_ranges  0x0000000000000170       0x20 Startup/startup_stm32f407vgtx.o
 
-.debug_macro    0x0000000000000000    0x19e8a
+.debug_macro    0x0000000000000000    0x1a044
  .debug_macro   0x0000000000000000       0xe6 MyLib/Src/ADC.o
  .debug_macro   0x00000000000000e6      0xa60 MyLib/Src/ADC.o
  .debug_macro   0x0000000000000b46       0x2f MyLib/Src/ADC.o
@@ -1092,25 +1089,28 @@ OUTPUT(STM32F4_Register_Learn.elf elf32-littlearm)
  .debug_macro   0x0000000000018d1b       0xfa MyLib/Src/UART.o
  .debug_macro   0x0000000000018e15       0xd7 MyLib/Src/timer.o
  .debug_macro   0x0000000000018eec       0x2e MyLib/Src/timer.o
- .debug_macro   0x0000000000018f1a      0x1de Src/main.o
- .debug_macro   0x00000000000190f8       0x46 Src/main.o
- .debug_macro   0x000000000001913e       0x18 Src/main.o
- .debug_macro   0x0000000000019156       0x3c Src/main.o
- .debug_macro   0x0000000000019192       0x34 Src/main.o
- .debug_macro   0x00000000000191c6      0x174 Src/main.o
- .debug_macro   0x000000000001933a       0x52 Src/main.o
- .debug_macro   0x000000000001938c       0x1f Src/main.o
- .debug_macro   0x00000000000193ab       0x43 Src/main.o
- .debug_macro   0x00000000000193ee       0x20 Src/main.o
- .debug_macro   0x000000000001940e      0x1a3 Src/main.o
- .debug_macro   0x00000000000195b1      0x32a Src/main.o
- .debug_macro   0x00000000000198db       0x10 Src/main.o
- .debug_macro   0x00000000000198eb       0x35 Src/main.o
- .debug_macro   0x0000000000019920       0x20 Src/main.o
- .debug_macro   0x0000000000019940      0x100 Src/main.o
- .debug_macro   0x0000000000019a40      0x208 Src/main.o
- .debug_macro   0x0000000000019c48      0x202 Src/main.o
- .debug_macro   0x0000000000019e4a       0x40 Src/main.o
+ .debug_macro   0x0000000000018f1a      0x1d4 Src/main.o
+ .debug_macro   0x00000000000190ee       0x40 Src/main.o
+ .debug_macro   0x000000000001912e       0x18 Src/main.o
+ .debug_macro   0x0000000000019146       0x94 Src/main.o
+ .debug_macro   0x00000000000191da       0x3c Src/main.o
+ .debug_macro   0x0000000000019216       0x34 Src/main.o
+ .debug_macro   0x000000000001924a      0x174 Src/main.o
+ .debug_macro   0x00000000000193be       0x57 Src/main.o
+ .debug_macro   0x0000000000019415       0x52 Src/main.o
+ .debug_macro   0x0000000000019467       0x1f Src/main.o
+ .debug_macro   0x0000000000019486       0x43 Src/main.o
+ .debug_macro   0x00000000000194c9       0x20 Src/main.o
+ .debug_macro   0x00000000000194e9      0x1a3 Src/main.o
+ .debug_macro   0x000000000001968c      0x330 Src/main.o
+ .debug_macro   0x00000000000199bc       0x10 Src/main.o
+ .debug_macro   0x00000000000199cc       0x35 Src/main.o
+ .debug_macro   0x0000000000019a01       0x20 Src/main.o
+ .debug_macro   0x0000000000019a21       0xd9 Src/main.o
+ .debug_macro   0x0000000000019afa      0x100 Src/main.o
+ .debug_macro   0x0000000000019bfa      0x208 Src/main.o
+ .debug_macro   0x0000000000019e02      0x202 Src/main.o
+ .debug_macro   0x000000000001a004       0x40 Src/main.o
 
 .debug_line     0x0000000000000000     0x24ec
  .debug_line    0x0000000000000000      0x577 MyLib/Src/ADC.o
@@ -1121,21 +1121,21 @@ OUTPUT(STM32F4_Register_Learn.elf elf32-littlearm)
  .debug_line    0x0000000000001cbf      0x7a9 Src/main.o
  .debug_line    0x0000000000002468       0x84 Startup/startup_stm32f407vgtx.o
 
-.debug_str      0x0000000000000000    0x8c60a
- .debug_str     0x0000000000000000    0x88411 MyLib/Src/ADC.o
-                                      0x88598 (size before relaxing)
- .debug_str     0x0000000000088411      0x624 MyLib/Src/GPIO.o
-                                      0x88823 (size before relaxing)
- .debug_str     0x0000000000088a35      0x5b2 MyLib/Src/SPI.o
-                                      0x88779 (size before relaxing)
- .debug_str     0x0000000000088fe7      0x1dd MyLib/Src/UART.o
-                                      0x88967 (size before relaxing)
- .debug_str     0x00000000000891c4       0xc9 MyLib/Src/timer.o
-                                      0x881d1 (size before relaxing)
- .debug_str     0x000000000008928d     0x334c Src/main.o
-                                      0x8c03c (size before relaxing)
- .debug_str     0x000000000008c5d9       0x31 Startup/startup_stm32f407vgtx.o
-                                         0x7d (size before relaxing)
+.debug_str      0x0000000000000000    0x8c60e
+ .debug_str     0x0000000000000000    0x88402 MyLib/Src/ADC.o
+                                      0x88589 (size before relaxing)
+ .debug_str     0x0000000000088402      0x624 MyLib/Src/GPIO.o
+                                      0x88814 (size before relaxing)
+ .debug_str     0x0000000000088a26      0x5b2 MyLib/Src/SPI.o
+                                      0x8876a (size before relaxing)
+ .debug_str     0x0000000000088fd8      0x1dd MyLib/Src/UART.o
+                                      0x88958 (size before relaxing)
+ .debug_str     0x00000000000891b5       0xc9 MyLib/Src/timer.o
+                                      0x881c2 (size before relaxing)
+ .debug_str     0x000000000008927e     0x335f Src/main.o
+                                      0x8c02b (size before relaxing)
+ .debug_str     0x000000000008c5dd       0x31 Startup/startup_stm32f407vgtx.o
+                                         0x6e (size before relaxing)
 
 .comment        0x0000000000000000       0x7b
  .comment       0x0000000000000000       0x7b MyLib/Src/ADC.o
