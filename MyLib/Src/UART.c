@@ -57,24 +57,24 @@ void UART2_Config(void)
 	NVIC_EnableIRQ(USART2_IRQn);
 }
 
-void UART2_SendChar(char chr)
+Section void UART_SendChar(USART_TypeDef *USARTx, char chr)
 {
-	USART2 -> DR = chr;
-	while (!(USART2 -> SR & (1 << TC)));
+	USARTx -> DR = chr;
+	while (!(USARTx -> SR & (1 << TC)));
 }
-void UART2_Writes(char *string, uint16_t size)
+void UART_Writes(USART_TypeDef *USARTx, char *string, uint16_t size)
 {
 	uint16_t index = 0;
 	while(index < size)
 	{
-		UART2_SendChar(string[index]);
+		UART_SendChar(USARTx, string[index]);
 		index++;
 	}
 }
-char UART2_ReadChar(void)
+char UART_ReadChar(USART_TypeDef *USARTx)
 {
 	char chr;
-	chr = USART2 -> DR;
+	chr = USARTx -> DR;
 	return (chr);
 }
 

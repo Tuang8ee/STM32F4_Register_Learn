@@ -7,7 +7,10 @@
 
 #ifndef ADC_H_
 #define ADC_H_
-#include "GPIO.h"
+
+#ifndef GPIO_H_
+	#include "GPIO.h"
+#endif
 
 #ifdef STM32F407DEF_H_
 	// ADC Resolution

@@ -7,7 +7,11 @@
 
 #ifndef TIMER_H_
 #define TIMER_H_
-#include "stm32f407def.h"
+#include "stm32.h"
+
+#ifdef STM32F407
+	#include "stm32f407def.h"
+#endif
 
 #ifdef STM32F407DEF_H_
 	// TIM6 & TIM7 control register 1

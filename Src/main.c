@@ -22,6 +22,20 @@
 //#endif
 
 #include "main.h"
+#include "DS3231.h"
+uint16_t times = 0;
+void SysTick_Handler(void)
+{
+	if(times >= 1000)
+	{
+		GPIO_Toggle(LED6_Port, LED6_Pin);
+		times = 0;
+	}
+	else
+	{
+		times++;
+	}
+}
 void EXTI0_IRQHandler(void)
 {
 	if(EXTI -> PR & (1 << PR0))
@@ -30,12 +44,12 @@ void EXTI0_IRQHandler(void)
 		if(GPIO_Read(BTN_Port, BTN_Pin))
 		{
 			GPIO_Write(LED4_Port, LED4_Pin, HIGH);
-			UART2_Writes("LED 3: BAT\n", 11);
+			UART_Writes(USART2, "LED 3: BAT\n", 11);
 		}
 		else
 		{
 			GPIO_Write(LED4_Port, LED4_Pin, LOW);
-			UART2_Writes("LED 3: TAT\n", 11);
+			UART_Writes(USART2, "LED 3: TAT\n", 11);
 		}
 	}
 }
@@ -57,7 +71,7 @@ char rx_array[100];
 uint8_t rx_index = 0;
 void USART2_RX_Interrupt(void)
 {
-	char chr = UART2_ReadChar();
+	char chr = UART_ReadChar(USART2);
 	if(chr == '{')
 	{
 		memset(rx_array, 0, 100);
@@ -85,18 +99,18 @@ void USART2_RX_Interrupt(void)
 	}
 }
 
-
 void Hardware_Config(void)
 {
 	SysClock_Config();
+	SysTick_Config(100000);
 	GPIO_Config();
 	Interrupt_Config();
 	TIM6_Config();
 	TIM7_Config();
 	UART2_Config();
-	ADC1_Config();
 	SPI1_Config();
 	SPI3_Config();
+	ADC1_Config();
 }
 
 /*
@@ -132,7 +146,7 @@ void Hardware_Config(void)
 		data[0]++;
 		data[2]++;
  */
-uint8_t adc_value[2];
+uint16_t adc_value[2];
 uint8_t data[5] = {1, 2, 3, 4, 5};
 uint8_t datarv[5];
 int main(void)
@@ -147,9 +161,9 @@ int main(void)
 		data[0]++;
 		data[2]++;
 		GPIO_Toggle(LED3_Port, LED3_Pin);
-		adc_value[0] = ADC1_GetValue(1);
-		adc_value[1] = ADC1_GetValue(2);
-		TIM6_Delay_ms(1000);
+		adc_value[0] = ADC1_GetValue(8);
+		adc_value[1] = ADC1_GetValue(9);
+		TIM6_Delay_ms(500);
 	}
 }
 
@@ -170,6 +184,8 @@ int main(void)
 	 * APB1 Prescale	: DIV4	: APB1 Prescale clock: AHB : 4 = 25Mhz
 	 * APB2 Prescale	: DIV2	: APB2 Prescale clock: AHB : 2 = 50Mhz
  */
+
+
 Section void SysClock_Config(void)
 {
 

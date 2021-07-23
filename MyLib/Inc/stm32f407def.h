@@ -17,7 +17,20 @@
 #define PLL_P	0		//00 PLLP = 2
 #define PLL_Q 	4
 
+// SysTick clock source selection
+#define AHB_DIV_8	0
+#define AHB_DIV_1	1
 
+// SysTick control and status register (STK_CTRL)
+#define ENABLE		0
+#define TICKINT		1
+#define CLKSOURCE	2
+#define COUNTFLAG	16
+
+// SysTick calibration value register (STK_CALIB)
+#define TENMS		0
+#define SKEW		30
+#define NOREF		31
 
 // RCC APB1 peripheral clock enable register (RCC_APB1ENR)
 #define TIM2_EN		0

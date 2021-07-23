@@ -8,14 +8,31 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+/*
+ * C language library
+ */
+#include "stdio.h"
 #include "string.h"
-#include "GPIO.h"
+/*
+ * STM32 peripherals library
+ */
 #include "timer.h"
 #include "UART.h"
 #include "ADC.h"
 #include "SPI.h"
+#ifndef GPIO_H_
+	#include "GPIO.h"
+#endif
+
+/*
+ * External peripheral
+ */
+
 //#include "DS3231.h"
 
+/*
+ * STM32 Discovery Kit
+ */
 #ifdef STM32F407DEF_H_
 
 #define LED3_Port	GPIOD

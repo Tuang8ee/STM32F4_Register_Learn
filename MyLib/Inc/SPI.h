@@ -8,7 +8,9 @@
 #ifndef SPI_H_
 #define SPI_H_
 
-#include "GPIO.h"
+#ifndef GPIO_H_
+	#include "GPIO.h"
+#endif
 
 #ifdef STM32F407DEF_H_
 
@@ -115,7 +117,7 @@
 	#define UDR			3
 	#define CRCERR		4
 	#define MODF		5
-	#define OVR			6
+	#define OVR_SPI		6
 	#define BSY			7
 	#define FRE			8
 #endif

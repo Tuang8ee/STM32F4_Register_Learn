@@ -8,7 +8,9 @@
 #ifndef I2C_H_
 #define I2C_H_
 
-#include "GPIO.h"
+#ifndef GPIO_H_
+	#include "GPIO.h"
+#endif
 
 #ifdef STM32F407DEF_H_
 	// I2C PINs define

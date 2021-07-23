@@ -13,7 +13,7 @@ void ADC1_Config(void)
 	RCC -> APB2ENR |= (1 << ADC1_EN);
 	RCC -> AHB1ENR |= (1 << GPIOA_EN);
 
-	GPIOA -> MODER |= (ANL << MODER2) |(ANL << MODER1);
+	GPIOA -> MODER |= (ANL << MODER8) |(ANL << MODER9);
 
 	ADC -> CCR |= (PCKL2_DIV_2 << ADCPRE);
 

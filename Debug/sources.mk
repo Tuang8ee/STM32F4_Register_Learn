@@ -17,8 +17,8 @@ OBJCOPY_BIN :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+MyLib/MyPeripheralLib/Src \
 MyLib/Src \
-MyPeripheralLib/Src \
 Src \
 Startup \
 

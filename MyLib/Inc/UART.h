@@ -8,7 +8,9 @@
 #ifndef UART_H_
 #define UART_H_
 
-#include "GPIO.h"
+#ifndef GPIO_H_
+	#include "GPIO.h"
+#endif
 
 #ifdef STM32F407DEF_H_
 	// USART Control register 1
@@ -68,8 +70,8 @@
 #define FindString(src, dic)						strstr((const char*)src, (const char*)dic)
 
 Section void UART2_Config(void);
-Section void UART2_SendChar(char chr);
-Section void UART2_Writes(char *string, uint16_t size);
-Section char UART2_ReadChar(void);
+Section void UART_SendChar(USART_TypeDef *USARTx, char chr);
+Section void UART_Writes(USART_TypeDef *USARTx, char *string, uint16_t size);
+Section char UART_ReadChar(USART_TypeDef *USARTx);
 
 #endif /* UART_H_ */
