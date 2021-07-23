@@ -121,7 +121,7 @@
 	#define MODER14		28
 	#define MODER15		30
 
-	// GGIO port output type register
+	// GPIO port output type register
 	#define OT0				0
 	#define OT1				1
 	#define OT2				2
