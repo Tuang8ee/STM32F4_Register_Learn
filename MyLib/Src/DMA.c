@@ -7,3 +7,8 @@
 
 
 #include "DMA.h"
+
+void DMA_Config(void)
+{
+
+}

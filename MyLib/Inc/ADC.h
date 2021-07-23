@@ -36,8 +36,8 @@
 	// ADC control register 2
 	#define ADON		0
 	#define CONT		1
-	#define CR2_DMA		8
-	#define CR2_DDS		9
+	#define ADC_DMA		8
+	#define ADC_DDS		9
 	#define EOCS		10
 	#define ALIGN		11
 	#define JEXTSEL		16
@@ -113,6 +113,7 @@
 #endif
 
 Section void ADC1_Config(void);
+void ADC_DMA_Start(ADC_TypeDef *ADCx);
 void ADC1_Start(uint8_t channel);
 uint16_t ADC1_GetValue(uint8_t channel);
 

@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00020008  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00003f51  00000000  00000000  00020038  2**0
+ 13 .debug_info   00003f7b  00000000  00000000  00020038  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_abbrev 00000aab  00000000  00000000  00023f89  2**0
+ 14 .debug_abbrev 00000ab4  00000000  00000000  00023fb3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_aranges 00000218  00000000  00000000  00024a38  2**3
+ 15 .debug_aranges 00000220  00000000  00000000  00024a68  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 000001b0  00000000  00000000  00024c50  2**3
+ 16 .debug_ranges 000001b8  00000000  00000000  00024c88  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_macro  00001fda  00000000  00000000  00024e00  2**0
+ 17 .debug_macro  00002000  00000000  00000000  00024e40  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_line   00002779  00000000  00000000  00026dda  2**0
+ 18 .debug_line   000027a4  00000000  00000000  00026e40  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_str    0008dca2  00000000  00000000  00029553  2**0
+ 19 .debug_str    0008df0d  00000000  00000000  000295e4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 20 .comment      0000007b  00000000  00000000  000b71f5  2**0
+ 20 .comment      0000007b  00000000  00000000  000b74f1  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  000006f0  00000000  00000000  000b7270  2**2
+ 21 .debug_frame  00000714  00000000  00000000  000b756c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -79,10 +79,10 @@ Disassembly of section .text:
  80001e4:	08000a28 	.word	0x08000a28
 
 080001e8 <ADC1_Start>:
-	ADC1 -> SQR1 |= (1 << L);
-
-	ADC1 -> CR2 |= (1 << ADON);
+	ADC1 -> SR = 0;
+	ADC1 -> CR2 |= (1 << SWSTART);
 }
+
 void ADC1_Start(uint8_t channel)
 {
  80001e8:	b480      	push	{r7}
@@ -121,6 +121,7 @@ void ADC1_Start(uint8_t channel)
  8000224:	40012000 	.word	0x40012000
 
 08000228 <ADC1_GetValue>:
+
 uint16_t ADC1_GetValue(uint8_t channel)
 {
  8000228:	b580      	push	{r7, lr}
@@ -1009,6 +1010,7 @@ void SysTick_Handler(void)
  80007d0:	40020c00 	.word	0x40020c00
 
 080007d4 <EXTI0_IRQHandler>:
+
 void EXTI0_IRQHandler(void)
 {
  80007d4:	b580      	push	{r7, lr}
@@ -1071,6 +1073,7 @@ void EXTI0_IRQHandler(void)
  800083c:	08001028 	.word	0x08001028
 
 08000840 <TIM7_IRQHandler>:
+
 void TIM7_IRQHandler(void)
 {
  8000840:	b580      	push	{r7, lr}
@@ -1097,6 +1100,7 @@ void TIM7_IRQHandler(void)
  8000868:	40020c00 	.word	0x40020c00
 
 0800086c <USART2_IRQHandler>:
+
 void USART2_IRQHandler(void)
 {
  800086c:	b580      	push	{r7, lr}
@@ -1153,10 +1157,10 @@ void Hardware_Config(void)
  80008bc:	000186a0 	.word	0x000186a0
 
 080008c0 <main>:
- */
 uint16_t adc_value[2];
 uint8_t data[5] = {1, 2, 3, 4, 5};
 uint8_t datarv[5];
+
 int main(void)
 {
  80008c0:	b580      	push	{r7, lr}
@@ -1419,7 +1423,7 @@ Disassembly of section .sec.:
 
 08000a40 <ADC1_Config>:
 {
- 8000a40:	b480      	push	{r7}
+ 8000a40:	b580      	push	{r7, lr}
  8000a42:	af00      	add	r7, sp, #0
 	RCC -> APB2ENR |= (1 << ADC1_EN);
  8000a44:	4b20      	ldr	r3, [pc, #128]	; (8000ac8 <_etext+0x88>)
@@ -1427,17 +1431,17 @@ Disassembly of section .sec.:
  8000a48:	4a1f      	ldr	r2, [pc, #124]	; (8000ac8 <_etext+0x88>)
  8000a4a:	f443 7380 	orr.w	r3, r3, #256	; 0x100
  8000a4e:	6453      	str	r3, [r2, #68]	; 0x44
-	RCC -> AHB1ENR |= (1 << GPIOA_EN);
+	RCC -> AHB1ENR |= (1 << GPIOB_EN);
  8000a50:	4b1d      	ldr	r3, [pc, #116]	; (8000ac8 <_etext+0x88>)
  8000a52:	6b1b      	ldr	r3, [r3, #48]	; 0x30
  8000a54:	4a1c      	ldr	r2, [pc, #112]	; (8000ac8 <_etext+0x88>)
- 8000a56:	f043 0301 	orr.w	r3, r3, #1
+ 8000a56:	f043 0302 	orr.w	r3, r3, #2
  8000a5a:	6313      	str	r3, [r2, #48]	; 0x30
-	GPIOA -> MODER |= (ANL << MODER8) |(ANL << MODER9);
+	GPIOB -> MODER |= (ANL << MODER1) |(ANL << MODER0);
  8000a5c:	4b1b      	ldr	r3, [pc, #108]	; (8000acc <_etext+0x8c>)
  8000a5e:	681b      	ldr	r3, [r3, #0]
  8000a60:	4a1a      	ldr	r2, [pc, #104]	; (8000acc <_etext+0x8c>)
- 8000a62:	f443 2370 	orr.w	r3, r3, #983040	; 0xf0000
+ 8000a62:	f043 030f 	orr.w	r3, r3, #15
  8000a66:	6013      	str	r3, [r2, #0]
 	ADC -> CCR |= (PCKL2_DIV_2 << ADCPRE);
  8000a68:	4b19      	ldr	r3, [pc, #100]	; (8000ad0 <_etext+0x90>)
@@ -1466,11 +1470,11 @@ Disassembly of section .sec.:
  8000a92:	4a10      	ldr	r2, [pc, #64]	; (8000ad4 <_etext+0x94>)
  8000a94:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
  8000a98:	6093      	str	r3, [r2, #8]
-	ADC1 -> SMPR2 |= (SAMPLE_15CYC << SMP2) | (SAMPLE_15CYC << SMP1);
+	ADC1 -> SMPR2 |= (SAMPLE_15CYC << SMP8) | (SAMPLE_15CYC << SMP9);
  8000a9a:	4b0e      	ldr	r3, [pc, #56]	; (8000ad4 <_etext+0x94>)
  8000a9c:	691b      	ldr	r3, [r3, #16]
  8000a9e:	4a0d      	ldr	r2, [pc, #52]	; (8000ad4 <_etext+0x94>)
- 8000aa0:	f043 0348 	orr.w	r3, r3, #72	; 0x48
+ 8000aa0:	f043 6310 	orr.w	r3, r3, #150994944	; 0x9000000
  8000aa4:	6113      	str	r3, [r2, #16]
 	ADC1 -> SQR1 |= (1 << L);
  8000aa6:	4b0b      	ldr	r3, [pc, #44]	; (8000ad4 <_etext+0x94>)
@@ -1484,13 +1488,14 @@ Disassembly of section .sec.:
  8000ab6:	4a07      	ldr	r2, [pc, #28]	; (8000ad4 <_etext+0x94>)
  8000ab8:	f043 0301 	orr.w	r3, r3, #1
  8000abc:	6093      	str	r3, [r2, #8]
+	TIM6_Delay_us(10);
+ 8000abe:	200a      	movs	r0, #10
+ 8000ac0:	f000 f992 	bl	8000de8 <TIM6_Delay_us>
 }
- 8000abe:	bf00      	nop
- 8000ac0:	46bd      	mov	sp, r7
- 8000ac2:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000ac6:	4770      	bx	lr
+ 8000ac4:	bf00      	nop
+ 8000ac6:	bd80      	pop	{r7, pc}
  8000ac8:	40023800 	.word	0x40023800
- 8000acc:	40020000 	.word	0x40020000
+ 8000acc:	40020400 	.word	0x40020400
  8000ad0:	40012300 	.word	0x40012300
  8000ad4:	40012000 	.word	0x40012000
 

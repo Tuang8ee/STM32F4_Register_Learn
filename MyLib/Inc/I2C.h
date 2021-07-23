@@ -82,6 +82,7 @@
 #define I2C_WRITE		0
 #define I2C_READ		1
 
+
 typedef enum
 {
 	I2C_OK,

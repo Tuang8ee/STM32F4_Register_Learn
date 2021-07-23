@@ -20,6 +20,7 @@
 #include "UART.h"
 #include "ADC.h"
 #include "SPI.h"
+#include "DMA.h"
 #ifndef GPIO_H_
 	#include "GPIO.h"
 #endif

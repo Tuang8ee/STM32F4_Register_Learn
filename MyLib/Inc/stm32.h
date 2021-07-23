@@ -8,6 +8,7 @@
 #ifndef INC_STM32_H_
 #define INC_STM32_H_
 
+//#define STM32F103
 #define STM32F407
 
 #endif /* INC_STM32_H_ */

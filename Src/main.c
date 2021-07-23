@@ -36,6 +36,7 @@ void SysTick_Handler(void)
 		times++;
 	}
 }
+
 void EXTI0_IRQHandler(void)
 {
 	if(EXTI -> PR & (1 << PR0))
@@ -53,12 +54,14 @@ void EXTI0_IRQHandler(void)
 		}
 	}
 }
+
 void TIM7_IRQHandler(void)
 {
 	TIM7 -> SR &= (0 << UIF);
 	TIM7 -> CNT = 64535;
 	GPIO_Toggle(LED5_Port, LED5_Pin);
 }
+
 void USART2_IRQHandler(void)
 {
 	if(USART2 -> SR & (1 << RXNE))
@@ -146,9 +149,11 @@ void Hardware_Config(void)
 		data[0]++;
 		data[2]++;
  */
+
 uint16_t adc_value[2];
 uint8_t data[5] = {1, 2, 3, 4, 5};
 uint8_t datarv[5];
+
 int main(void)
 {
 	Hardware_Config();
