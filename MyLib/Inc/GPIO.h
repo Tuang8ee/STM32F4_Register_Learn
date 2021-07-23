@@ -6,14 +6,8 @@
  */
 
 #ifndef GPIO_H_
-	#define GPIO_H_
-
-#include "stm32.h"
-
-#ifdef STM32F407
-	#include "stm32f407def.h"
-#endif
-
+#define GPIO_H_
+	#include "PeripheralConfig.h"
 #define HIGH	1
 #define LOW		0
 #ifdef STM32F407DEF_H_
