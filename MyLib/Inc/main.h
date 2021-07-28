@@ -13,7 +13,9 @@
  */
 #include "stdio.h"
 #include "string.h"
-#include "PeripheralConfig.h"
+#include "STM32F407Config.h"
+
+//#include "SysClockConfig.h"
 /*
  * STM32 peripherals library
  */
@@ -25,8 +27,8 @@
 
 //#include "DS3231.h"
 
-Section void USART2_RX_Interrupt(void);
-Section void Delay_Cycle (uint32_t time);
+
+void Delay_Cycle (uint32_t time);
 
 
 #endif /* MAIN_H_ */

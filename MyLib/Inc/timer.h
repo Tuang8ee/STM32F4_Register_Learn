@@ -10,27 +10,43 @@
 #include "stm32.h"
 
 #ifdef STM32F407
+#ifndef STM32F407DEF_H_
 	#include "stm32f407def.h"
 #endif
-
-#ifdef STM32F407DEF_H_
-	// TIM6 & TIM7 control register 1
-	#define CEN			0
-	#define UDIS		1
-	#define OPM			3
-	#define ARPE		7
-
-	// TIM6 & TIM7 status register
-	#define UIF			0
-
-	// TIM6 & TIM7 DMA/Interrupt enable register
-	#define UIE	0
-	#define UDE	8
 #endif
 
-Section void TIM6_Config(void);
-Section void TIM7_Config(void);
-Section void TIM6_Delay_us(uint16_t time);
-Section void TIM6_Delay_ms(uint32_t time);
+void TIM6_Config(void)
+{
+	/*
+	 * APB1 Timer clocks: 50Mhz
+	 * Enable Timer 6
+	 * Timer Prescale: 50Mhz/50 ~ 1us
+	 * Counter Enable
+	 */
+	RCC -> APB1ENR |= (1 << TIM6_EN);
+
+	TIM6 -> PSC = HSE_Clock.APB1 * 2 - 1;
+	TIM6 -> CNT = 0 - 1;
+	TIM6 -> CR1 |= (1 << CEN);
+	while(!(TIM6 -> SR & (1 << UIF)));
+}
+
+void TIM6_Delay_us(uint16_t time)
+{
+	TIM6_Config();
+	TIM6 -> CNT = 0;
+
+
+	while(TIM6 -> CNT < time);
+	TIM6 -> CR1 = 0x00;
+}
+
+void TIM6_Delay_ms(uint32_t time)
+{
+	while(time --)
+	{
+		TIM6_Delay_us(1000);
+	}
+}
 
 #endif /* TIMER_H_ */

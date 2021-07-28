@@ -1,6 +1,0 @@
-core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
-core_cm4.h:1816:22:__NVIC_SetPriority	16	static
-timer.c:12:6:TIM6_Config	4	static
-timer.c:46:6:TIM7_Config	8	static
-timer.c:28:6:TIM6_Delay_us	16	static
-timer.c:38:6:TIM6_Delay_ms	16	static

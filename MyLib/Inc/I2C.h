@@ -12,73 +12,6 @@
 	#include "GPIO.h"
 #endif
 
-#ifdef STM32F407DEF_H_
-	// I2C PINs define
-	#define I2C_AF			AF4
-
-	#define I2C1_PORT		GPIOB
-	#define I2C1_PORT_EN	GPIOB_EN
-	#define I2C1_SDA		7
-	#define I2C1_SCL		6
-	#define I2C1_SCL_H_SP	OSPEEDR6
-	#define I2C1_SDA_H_SP	OSPEEDR7
-	#define I2C1_SCL_MODER	MODER6
-	#define I2C1_SDA_MODER	MODER7
-
-	#define I2C1_SCL_AF		AFRL6
-	#define I2C1_SDA_AF		AFRL7
-	#define I2C1_SCL_PUPDR	PUPDR6
-	#define I2C1_SDA_PUPDR	PUPDR7
-
-	// I2C Control register 1 (I2C_CR1)
-	#define PE			0
-	#define SMBUS		1
-	#define SMBTYPE		3
-	#define ENARP		4
-	#define ENPEC		5
-	#define ENGC		6
-	#define NOSTRETCH	7
-	#define START		8
-	#define STOP		9
-	#define ACK			10
-	#define POS			11
-	#define PEC			12
-	#define ALERT		13
-	#define SWRST		15
-
-	// I2C Control register 2 (I2C_CR2)
-	#define FREQ	0
-	#define ITERREN	8
-	#define ITEVTEN	9
-	#define ITBUFEN 10
-	#define DMAEN	11
-	#define LAST	12
-
-	// F_S value
-	#define Fm		1
-	#define Sm		0
-	// I2C Clock control register (I2C_CCR)
-	#define I2C_CCR	0
-	#define DUTY	14
-	#define F_S		15
-
-	// I2C Status register 1
-	#define SB			0
-	#define ADDR		1
-	#define BTF			2
-	#define ADD10		3
-	#define STOPF		4
-	#define RxNE		6
-	#define TxE			7
-	#define BERR		8
-	#define ARLO    	9
-	#define AF			10
-	#define OVR			11
-	#define PECERR		12
-	#define TIMEOUT		14
-	#define SMBALERT	15
-#endif
-
 #define I2C_WRITE		0
 #define I2C_READ		1
 
@@ -90,13 +23,134 @@ typedef enum
 }I2C_State;
 
 
+I2C_State I2C_Start(I2C_TypeDef *I2Cx)
+{
+	uint32_t timeout = 100000;
+	I2Cx -> CR1 |= (1 << ACK);
+	I2Cx -> CR1 |= (1 << START);
+	while(timeout)
+	{
+		if(!(I2Cx -> SR1 & (1 << SB)))timeout--;
+		else
+		{
+			timeout = 0;
+			return I2C_OK;
+		}
+	}
+	return I2C_ERROR;
+}
+void I2C_Stop(I2C_TypeDef *I2Cx)
+{
+	I2Cx -> CR1 &= ~(1 << ACK);
+	I2Cx -> CR1 |= (1 << STOP);
+}
 
-void I2C1_Config(void);
-I2C_State I2C1_Start(void);
-I2C_State I2C1_AddressRequest(uint8_t devaddress, uint8_t memaddress);
-void I2C1_Writes(uint8_t devaddress, uint8_t memaddress, uint8_t *data, uint8_t size);
-void I2C1_Write(uint8_t devaddress, uint8_t memaddress, uint8_t data);
-I2C_State I2C1_AddressRead(uint8_t devaddress, uint8_t memaddress, uint8_t* data);
-void I2C1_Stop(void);
+
+uint8_t I2C_Read(I2C_TypeDef *I2Cx)
+{
+	uint8_t data;
+	while(!(I2Cx -> SR1 & (1 << RxNE)))
+	{
+		if((I2Cx -> SR1 & (1 << AF)))
+		{
+			I2C_Stop(I2Cx);
+			break;
+		}
+	}
+	data = I2Cx -> DR;
+	return (data);
+}
+I2C_State I2C_AddressRequest(I2C_TypeDef *I2Cx, uint8_t devaddress, uint8_t memaddress)
+{
+	uint32_t timeout = 100000;
+
+	if(I2C_Start(I2Cx) != I2C_OK)
+	{
+		return I2C_ERROR;
+	}
+
+	I2Cx -> DR = (devaddress << 1) + 0;
+
+	//Wait ADDR Flag is set
+	while(timeout)
+	{
+		if(!(I2Cx -> SR1 & (1 << ADDR)))timeout--;
+		else
+		{
+			timeout = I2Cx -> SR1;
+			timeout = I2Cx -> SR2;
+			break;
+		}
+	}
+	while(!(I2Cx -> SR1 & (1 << TxE)));
+	I2Cx -> DR = memaddress;
+	while(!(I2Cx -> SR1 & (1 << TxE)));
+	return I2C_OK;
+}
+I2C_State I2C_AddressRead(I2C_TypeDef *I2Cx, uint8_t devaddress, uint8_t memaddress, uint8_t* data)
+{
+	uint32_t timeout = 100000;
+
+	I2C_AddressRequest(I2Cx, devaddress, memaddress);
+
+	if(I2C_Start(I2Cx) != I2C_OK)
+	{
+		return I2C_ERROR;
+	}
+
+	I2Cx -> DR = (devaddress << 1) + 1;
+
+	//Wait ADDR Flag is set
+	while(timeout)
+	{
+		if(!(I2Cx -> SR1 & (1 << ADDR)))timeout--;
+		else
+		{
+			timeout = I2Cx -> SR1;
+			timeout = I2Cx -> SR2;
+			break;
+		}
+	}
+	*data = I2C_Read(I2Cx);
+	I2C_Stop(I2Cx);
+	return I2C_OK;
+}
+
+void I2C_Write(I2C_TypeDef *I2Cx, uint8_t devaddress, uint8_t memaddress, uint8_t data)
+{
+	uint32_t timeout = 100000;
+	I2C_AddressRequest(I2Cx, devaddress, memaddress);
+	I2Cx -> DR = data;
+	while(timeout--)
+	{
+		if(!(I2Cx -> SR1 & (1 << BTF))); // wait for BTF bit set
+		else
+		{
+			break;
+		}
+	}
+	I2C_Stop(I2Cx);
+}
+
+void I2C_Writes(I2C_TypeDef *I2Cx, uint8_t devaddress, uint8_t memaddress, uint8_t *data, uint8_t size)
+{
+	uint8_t index;
+	uint32_t timeout = 100000;
+	I2C_AddressRequest(I2Cx, devaddress, memaddress);
+	for(index = 0; index < size;)
+	{
+		I2Cx -> DR = data[index];
+		index++;
+	}
+	while(timeout--)
+	{
+		if(!(I2Cx -> SR1 & (1 << BTF))); // wait for BTF bit set
+		else
+		{
+			break;
+		}
+	}
+	I2C_Stop(I2Cx);
+}
 
 #endif /* I2C_H_ */

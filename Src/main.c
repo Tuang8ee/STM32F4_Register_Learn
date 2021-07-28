@@ -22,84 +22,6 @@
 //#endif
 
 #include "main.h"
-uint16_t times = 0;
-void SysTick_Handler(void)
-{
-	if(times >= 1000)
-	{
-		GPIO_Toggle(LED6_Port, LED6_Pin);
-		times = 0;
-	}
-	else
-	{
-		times++;
-	}
-}
-
-void EXTI0_IRQHandler(void)
-{
-	if(EXTI -> PR & (1 << PR0))
-	{
-		EXTI -> PR &= ~(0 << PR0);
-		if(GPIO_Read(BTN_Port, BTN_Pin))
-		{
-			GPIO_Write(LED4_Port, LED4_Pin, HIGH);
-			UART_Writes(USART2, "LED 3: BAT\n", 11);
-		}
-		else
-		{
-			GPIO_Write(LED4_Port, LED4_Pin, LOW);
-			UART_Writes(USART2, "LED 3: TAT\n", 11);
-		}
-	}
-}
-
-void TIM7_IRQHandler(void)
-{
-	TIM7 -> SR &= (0 << UIF);
-	TIM7 -> CNT = 64535;
-	GPIO_Toggle(LED5_Port, LED5_Pin);
-}
-
-void USART2_IRQHandler(void)
-{
-	if(USART2 -> SR & (1 << RXNE))
-	{
-		USART2_RX_Interrupt();
-	}
-}
-
-char rx_array[100];
-uint8_t rx_index = 0;
-void USART2_RX_Interrupt(void)
-{
-	char chr = UART_ReadChar(USART2);
-	if(chr == '{')
-	{
-		memset(rx_array, 0, 100);
-		rx_index = 0;
-		rx_array[rx_index] = chr;
-		rx_index++;
-	}
-	else if(chr == '}')
-	{
-		rx_array[rx_index] = chr;
-		rx_index = 0;
-	}
-	else
-	{
-		rx_array[rx_index] = chr;
-		rx_index++;
-	}
-	if(FindString(rx_array, "BAT") != 0)
-	{
-		GPIO_Write(LED6_Port, LED6_Pin, HIGH);
-	}
-	else if(FindString(rx_array, "TAT") != 0)
-	{
-		GPIO_Write(LED6_Port, LED6_Pin, LOW);
-	}
-}
 
 void Hardware_Config(void)
 {
@@ -107,7 +29,6 @@ void Hardware_Config(void)
 	SysTick_Config(100000);
 	GPIO_Config();
 	Interrupt_Config();
-	TIM6_Config();
 	TIM7_Config();
 	UART2_Config();
 	SPI1_Config();
@@ -119,7 +40,7 @@ void Hardware_Config(void)
  * I2C1_Config();
  *
  * RTC_SET:
- *  DS3231_GetTime(&time);
+	DS3231_GetTime(I2C1, &time);
 	if(time.year == 0)
 	{
 		time.sec = 0;
@@ -130,9 +51,9 @@ void Hardware_Config(void)
 		time.day = 6;
 		time.month = 7;
 		time.year = 21;
-		DS3231_SetTime(&time);
+		DS3231_SetTime(I2C1, &time);
 	}
-	DS3231_GetTime(&time);
+	DS3231_GetTime(I2C1, &time);
 
 	RTC_Time time;
 */
@@ -167,27 +88,9 @@ int main(void)
 		GPIO_Toggle(LED3_Port, LED3_Pin);
 		adc_value[0] = ADC1_GetValue(8);
 		adc_value[1] = ADC1_GetValue(9);
-		TIM6_Delay_ms(500);
+		TIM6_Delay_ms(1000);
 	}
 }
-
-
-/*
-	 * Instruction Cache: Enable
-	 * Prefetch Buffer	: Enable
-	 * Data Cache		: Enable
-	 * Flash Latency	: 3 wait state
-	 * Power Regulator Voltage Scale: Scale 1
-	 * HSE clock: 	8Mhz
-	 * Main PLL : Enable
-	 * 	+ PLL_M	: 8
-	 * 	+ PLL_N	: 200
-	 * 	+ PLL_P	: 2
-	 * 	=> System Clock = HSE : 8 * 200 : 2 = 100Mhz
-	 * AHB Prescale		: DIV1	: System Clock : 1 = 100Mhz
-	 * APB1 Prescale	: DIV4	: APB1 Prescale clock: AHB : 4 = 25Mhz
-	 * APB2 Prescale	: DIV2	: APB2 Prescale clock: AHB : 2 = 50Mhz
- */
 
 void Delay_Cycle (uint32_t time)
 {

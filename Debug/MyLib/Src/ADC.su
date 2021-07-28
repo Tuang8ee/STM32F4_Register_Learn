@@ -1,4 +1,0 @@
-ADC.c:12:6:ADC1_Config	8	static
-ADC.c:33:6:ADC_DMA_Start	16	static
-ADC.c:43:6:ADC1_Start	16	static
-ADC.c:51:10:ADC1_GetValue	16	static

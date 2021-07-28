@@ -1,0 +1,5 @@
+Interrupts.c:13:6:SysTick_Handler	8	static
+Interrupts.c:25:6:EXTI0_IRQHandler	8	static
+Interrupts.c:43:6:TIM7_IRQHandler	0	static
+Interrupts.c:60:6:USART2_RX_Interrupt	16	static
+Interrupts.c:50:6:USART2_IRQHandler	0	static

@@ -1,8 +1,0 @@
-I2C.c:12:6:I2C1_Config	4	static
-I2C.c:50:11:I2C1_Start	16	static
-I2C.c:66:6:I2C1_Stop	4	static
-I2C.c:73:9:I2C1_Read	16	static
-I2C.c:87:11:I2C1_AddressRequest	24	static
-I2C.c:114:11:I2C1_AddressRead	24	static
-I2C.c:143:6:I2C1_Write	24	static
-I2C.c:159:6:I2C1_Writes	24	static

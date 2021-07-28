@@ -1,4 +1,0 @@
-DS3231.c:9:9:BCD2DEC	16	static
-DS3231.c:12:9:DEC2BCD	16	static
-DS3231.c:16:6:DS3231_SetTime	24	static
-DS3231.c:32:6:DS3231_GetTime	16	static
