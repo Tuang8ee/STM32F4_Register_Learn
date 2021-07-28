@@ -1,4 +1,4 @@
-"MyLib/Src/Interrupts.o"
+"Src/Interrupts.o"
 "Src/main.o"
 "Src/syscalls.o"
 "Src/sysmem.o"
