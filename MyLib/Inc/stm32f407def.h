@@ -13,6 +13,7 @@
 #define FindString(src, dic)		strstr((const char*)src, (const char*)dic)
 #define Section	__attribute__((section(".sec.")))
 
+
 #define HIGH	1
 #define LOW		0
 
@@ -191,6 +192,9 @@
 	#define OUTPUT	1
 	#define AFM		2
 	#define ANL		3
+/*
+ * GPIO register:
+ */
 	// GPIO port mode register
 	#define MODER0		0
 	#define MODER1		2
@@ -226,7 +230,6 @@
 	#define OT13			13
 	#define OT14			14
 	#define OT15			15
-
 
 	// GPIO port speed register
 	#define OSPEEDR0		0
@@ -268,7 +271,7 @@
 	#define PUPDR13		26
 	#define PUPDR14		28
 	#define PUPDR15		30
-	// GPIO alternate funcion register
+	// GPIO alternate function register
 	// GPIO alternate function low register
 	#define AFRL		AFR[0]
 	#define AFRL0		0
@@ -308,6 +311,9 @@
 	#define AF14	14
 	#define AF15	15
 
+/*
+ * Timer register
+ */
 	// TIM6 & TIM7 control register 1
 	#define CEN			0
 	#define UDIS		1
@@ -321,6 +327,9 @@
 	#define UIE	0
 	#define UDE	8
 
+/*
+ * Timer register
+ */
 	// ADC Resolution
 	#define ADC_12_BIT	0
 	#define ADC_10_BIT	1
@@ -419,6 +428,9 @@
 	#define VBATE	22
 	#define TSWREFE	23
 
+/*
+ * USART register
+ */
 	// USART Control register 1
 	#define SBK 		0
 	#define RWu			1
@@ -469,7 +481,9 @@
 	#define LBD		8
 	#define CTS		9
 
-
+/*
+ * I2C register
+ */
 	// I2C PINs define
 	#define I2C_AF			AF4
 
@@ -535,7 +549,9 @@
 	#define TIMEOUT		14
 	#define SMBALERT	15
 
-
+/*
+ * SPI register
+ */
 	#define SPIM_AF			AF5
 	#define SPIS_AF			AF6
 	// SPI1 PINs define
@@ -642,4 +658,6 @@
 	#define OVR_SPI		6
 	#define BSY			7
 	#define FRE			8
+
+
 #endif /* STM32F407DEF_H_ */

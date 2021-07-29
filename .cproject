@@ -45,6 +45,7 @@
 									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_VHEC_Training\STM32F4_Register_Learn\Drivers\CMSIS\Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;F:\Projects\Projects\Work\Work\Learn\STM32_VHEC_Training\STM32F4_Register_Learn\MyLib\Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F4_Register_Learn/MyLib/MyPeripheralLib/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F4_Register_Learn/MyLib/Inc/Peripheral/Inc}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.2108922739" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

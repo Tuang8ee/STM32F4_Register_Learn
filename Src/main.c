@@ -23,19 +23,6 @@
 
 #include "main.h"
 
-void Hardware_Config(void)
-{
-	SysClock_Config();
-	SysTick_Config(100000);
-	GPIO_Config();
-	Interrupt_Config();
-	TIM7_Config();
-	UART2_Config();
-	SPI1_Config();
-	SPI3_Config();
-	ADC1_Config();
-}
-
 /*
  * I2C1_Config();
  *
@@ -88,12 +75,6 @@ int main(void)
 		GPIO_Toggle(LED3_Port, LED3_Pin);
 		adc_value[0] = ADC1_GetValue(8);
 		adc_value[1] = ADC1_GetValue(9);
-		TIM6_Delay_ms(1000);
+		TIM6_Delay_ms(200);
 	}
 }
-
-void Delay_Cycle (uint32_t time)
-{
-	while (time --);
-}
-

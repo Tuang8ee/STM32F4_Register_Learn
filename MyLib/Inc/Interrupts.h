@@ -8,7 +8,8 @@
 #ifndef INC_INTERRUPTS_H_
 #define INC_INTERRUPTS_H_
 
-#include "stm32f407def.h"
+#include "string.h"
+#include "Peripheral.h"
 
 void SysTick_Handler(void);
 void EXTI0_IRQHandler(void);

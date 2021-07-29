@@ -1,0 +1,8 @@
+SPI.c:11:6:SPI_Enable	0	static
+SPI.c:15:6:SPI_Disable	0	static
+SPI.c:19:6:SPI_CS_Enable	0	static
+SPI.c:23:6:SPI_CS_Disable	0	static
+SPI.c:28:6:SPI_Transmit	12	static
+SPI.c:70:6:SPI_Receive	12	static
+SPI.c:100:6:SPI_TransmitReceive	16	static
+SPI.c:168:6:SPI_TransmitReceives	20	static

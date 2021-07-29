@@ -1,0 +1,2 @@
+timer.c:12:6:TIM6_Delay_us	8	static
+timer.c:22:6:TIM6_Delay_ms	8	static

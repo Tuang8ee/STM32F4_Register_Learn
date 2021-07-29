@@ -1,18 +1,13 @@
 /*
- * SPI.h
+ * SPI.c
  *
- *  Created on: Jul 13, 2021
+ *  Created on: Jul 29, 2021
  *      Author: tuang
  */
 
-#ifndef SPI_H_
-#define SPI_H_
+#include "SPI.h"
 
-#ifndef GPIO_H_
-	#include "GPIO.h"
-#endif
-
-
+#ifdef STM32F407DEF_H_
 void SPI_Enable(SPI_TypeDef * SPIx)
 {
 	SPIx -> CR1 |= (1 << SPE);
@@ -234,5 +229,4 @@ void SPI_TransmitReceives(SPI_TypeDef * SPIx, SPI_TypeDef * SPIy ,uint8_t *tx_da
 	}
 }
 
-
-#endif /* SPI_H_ */
+#endif /* STM32F407_H_ */

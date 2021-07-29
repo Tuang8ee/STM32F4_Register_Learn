@@ -6,7 +6,6 @@
  */
 
 #include "Interrupts.h"
-#include "string.h"
 
 uint16_t times = 0;
 

@@ -1,16 +1,10 @@
 /*
- * UART.h
+ * UART.c
  *
- *  Created on: Jul 12, 2021
+ *  Created on: Jul 29, 2021
  *      Author: tuang
  */
-
-#ifndef UART_H_
-#define UART_H_
-
-#ifndef GPIO_H_
-	#include "GPIO.h"
-#endif
+#include <UART.h>
 
 void UART_SendChar(USART_TypeDef *USARTx, char chr)
 {
@@ -32,5 +26,3 @@ char UART_ReadChar(USART_TypeDef *USARTx)
 	chr = USARTx -> DR;
 	return (chr);
 }
-
-#endif /* UART_H_ */

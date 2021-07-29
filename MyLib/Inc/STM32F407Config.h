@@ -9,13 +9,11 @@
 #define INC_STM32F407CONFIG_H_
 
 #include "SysClockConfig.h"
-#include "GPIO.h"
-#include "timer.h"
-#include "ADC.h"
-#include "UART.h"
-#include "SPI.h"
-//#include "I2C.h"
+#include "Peripheral.h"
 
+#ifndef GPIO_H_
+	#include "GPIO.h"
+#endif
 
 #ifdef STM32F407DEF_H_
 
@@ -24,12 +22,12 @@ void GPIO_Config(void)
 {
 	// Set clock GPIO
 	RCC -> AHB1ENR |= (1 << GPIOD_EN);
-	// GPIO config
+	// GPIO config output
 	GPIOD -> MODER |= (OUTPUT << LED3_Pin * 2) | (OUTPUT << LED4_Pin * 2) | (OUTPUT << LED5_Pin * 2) | (OUTPUT << LED6_Pin * 2);
 	GPIOD -> OTYPER = (OUTPUT_PP << LED3_Pin) | (OUTPUT_PP << LED4_Pin) | (OUTPUT_PP << LED5_Pin) | (OUTPUT_PP << LED6_Pin);
 	GPIOD -> OSPEEDR = (H_SPEED << LED3_Pin * 2) | (H_SPEED << LED4_Pin * 2) | (H_SPEED << LED5_Pin * 2) | (H_SPEED << LED6_Pin * 2);
 	GPIOD -> PUPDR = (PUP_N_PP << LED3_Pin) | (PUP_N_PP << LED4_Pin) | (PUP_N_PP << LED5_Pin) | (PUP_N_PP << LED6_Pin);
-
+	// GPIO config input
 	RCC -> AHB1ENR |= (1 << GPIOA_EN);
 	GPIOA -> MODER |= (INPUT << BTN_Pin);
 	GPIOA -> PUPDR |= (PUP_N_PP << BTN_Pin);
@@ -48,6 +46,23 @@ void Interrupt_Config(void)
 #endif /* GPIO_H_ */
 
 #ifdef TIMER_H_
+
+void TIM6_Config(void)
+{
+	/*
+	 * APB1 Timer clocks: 50Mhz
+	 * Enable Timer 6
+	 * Timer Prescale: 50Mhz/50 ~ 1us
+	 * Counter Enable
+	 */
+	RCC -> APB1ENR |= (1 << TIM6_EN);
+
+	TIM6 -> PSC = HSE_Clock.APB1 * 2 - 1;
+	TIM6 -> CNT = 0 - 1;
+	TIM6 -> CR1 |= (1 << CEN);
+	while(!(TIM6 -> SR & (1 << UIF)));
+}
+
 void TIM7_Config(void)
 {
 	uint32_t TIME_Clock = HSE_Clock.APB1 * 2 * 1000000;
@@ -77,19 +92,24 @@ void TIM7_Config(void)
 void ADC1_Config(void)
 {
 	RCC -> APB2ENR |= (1 << ADC1_EN);
-	RCC -> AHB1ENR |= (1 << GPIOB_EN);
 
+	// GPIO config analog pin _ Channel 8: PB0 & Channel 9: PB1
+	RCC -> AHB1ENR |= (1 << GPIOB_EN);
 	GPIOB -> MODER |= (ANL << MODER1) |(ANL << MODER0);
 
+	/*
+	 * ADC clock = APB clock / PCKL2_DIV_x
+	 */
 	ADC -> CCR |= (PCKL2_DIV_2 << ADCPRE);
 
-	ADC1 -> CR1 |= (1 << SCAN) | (ADC_12_BIT << RES); // Scan mode + 12 bit ADC restion
-	ADC1 -> CR2 = (1 << CONT);
-	ADC1 -> CR2 |= (1 << EOCS); //
+	// Scan mode + 12 bit ADC resolution
+	ADC1 -> CR1 |= (1 << SCAN) | (ADC_12_BIT << RES);
+	ADC1 -> CR2 |= (1 << CONT);
+	ADC1 -> CR2 |= (1 << EOCS);
 	ADC1 -> CR2 &= ~(1 << ALIGN);
 
 	ADC1 -> SMPR2 |= (SAMPLE_15CYC << SMP8) | (SAMPLE_15CYC << SMP9);
-	ADC1 -> SQR1 |= (1 << L);
+	ADC1 -> SQR1  |= (1 << L);
 
 	ADC1 -> CR2 |= (1 << ADON);
 	TIM6_Delay_us(10);

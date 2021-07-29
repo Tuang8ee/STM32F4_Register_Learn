@@ -1,20 +1,13 @@
 /*
- * ADC.h
+ * ADC.c
  *
- *  Created on: Jul 12, 2021
+ *  Created on: Jul 29, 2021
  *      Author: tuang
  */
 
-#ifndef ADC_H_
-#define ADC_H_
+#include "ADC.h"
 
-#ifndef GPIO_H_
-	#include "GPIO.h"
-#endif
-#ifndef TIMER_H_
-	#include "timer.h"
-#endif
-
+#ifdef STM32F407DEF_H_
 
 void ADC_DMA_Start(ADC_TypeDef *ADCx)
 {
@@ -40,5 +33,4 @@ uint16_t ADC1_GetValue(uint8_t channel)
 	return (ADC1 -> DR);
 }
 
-
-#endif /* ADC_H_ */
+#endif /* STM32F407DEF_H_ */
